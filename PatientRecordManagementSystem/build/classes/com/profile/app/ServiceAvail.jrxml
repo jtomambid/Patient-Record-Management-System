@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ServiceAvail" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="47adc1b4-733c-4a76-b4d5-29a77754683a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select *,
+(select count(distinct service_avail)  from Patient ) AS serviceAvail
+from Patient]]>
+	</queryString>
+	<field name="p_id" class="java.lang.Integer"/>
+	<field name="p_fname" class="java.lang.String"/>
+	<field name="p_lname" class="java.lang.String"/>
+	<field name="p_mi" class="java.lang.String"/>
+	<field name="p_age" class="java.lang.String"/>
+	<field name="p_gender" class="java.lang.String"/>
+	<field name="p_contact" class="java.lang.String"/>
+	<field name="p_birthdate" class="java.lang.String"/>
+	<field name="p_address" class="java.lang.String"/>
+	<field name="p_occupation" class="java.lang.String"/>
+	<field name="philhealthno" class="java.lang.String"/>
+	<field name="attendant" class="java.lang.String"/>
+	<field name="service_avail" class="java.lang.String"/>
+	<field name="diagnosis" class="java.lang.String"/>
+	<field name="serviceavail" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="142" splitType="Stretch">
+			<image>
+				<reportElement x="136" y="0" width="572" height="79" uuid="d2f44f90-b83f-4cee-985a-6393f5e3e4ae"/>
+				<imageExpression><![CDATA["C:\\Users\\Tomambid\\Documents\\NetBeansProjects\\PatientRecordManagementSystem\\src\\com\\profile\\img\\lwell-family-ogo_resized (1).gif"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="101" y="79" width="342" height="35" uuid="1b3729cd-8b3e-490b-aeab-a54c5fd22e2d"/>
+				<textElement>
+					<font fontName="Arial Black" size="14"/>
+				</textElement>
+				<text><![CDATA[Barangay 22-C Piapi Boulevard, Davao City]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="373" y="0" width="199" height="35" uuid="fdc849c3-dd20-42aa-9a0d-217195e5dd14"/>
+				<textElement>
+					<font fontName="Arial Black" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="39" width="57" height="20" uuid="2b52ed63-2684-4b3c-a1a7-e91140ab9b2d"/>
+				<textElement>
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="39" width="154" height="22" uuid="d1b70f58-2456-47c7-b34b-2c6682e394bb"/>
+				<textElement>
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Patient Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="37" width="154" height="22" uuid="14277b9b-7a98-46c2-a207-0aa723d85e5d"/>
+				<textElement>
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Attendant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="39" width="199" height="22" uuid="190d0ad8-a547-4a34-abd8-d68ea37f8a8f"/>
+				<textElement>
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Service Avail]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="390" y="0" width="185" height="20" uuid="276e0fbe-4daa-42ae-b8fd-5d6266db8f35"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{serviceavail}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="0" width="67" height="20" uuid="f605ae59-3ddb-4ae4-9f1e-2b02deffb301"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="0" width="144" height="20" uuid="6c25183d-c3cf-4793-8831-06c15b1a203b"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_fname} + " " +$F{p_mi} + ". " +$F{p_lname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="214" y="0" width="176" height="20" uuid="2a598e33-4ffb-4f14-8a10-54b506731526"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{attendant}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="185" splitType="Stretch">
+			<pieChart>
+				<chart>
+					<reportElement x="3" y="0" width="569" height="185" uuid="366008b5-69d1-43b1-9176-0aa4e8afa8df"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{service_avail}]]></keyExpression>
+					<valueExpression><![CDATA[$F{serviceavail}]]></valueExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

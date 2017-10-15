@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MedicineAvailReport" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="59f0092e-be49-4ab5-9d88-37adff82dcc5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select *,
+(select count(distinct med_name)  from Medicine_avail ) AS med_avail,
+(select count(distinct con_name)  from Medicine_avail ) AS con_avail
+from Medicine_avail]]>
+	</queryString>
+	<field name="ma_id" class="java.lang.Integer"/>
+	<field name="p_name" class="java.lang.String"/>
+	<field name="med_name" class="java.lang.String"/>
+	<field name="con_name" class="java.lang.String"/>
+	<field name="med_avail" class="java.lang.Long"/>
+	<field name="con_avail" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<image>
+				<reportElement x="143" y="0" width="572" height="79" uuid="30bb465a-ff3f-43de-8753-e3803d8d49a3"/>
+				<imageExpression><![CDATA["C:\\Users\\Tomambid\\Documents\\NetBeansProjects\\PatientRecordManagementSystem\\src\\com\\profile\\img\\lwell-family-ogo_resized (1).gif"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="113" y="79" width="342" height="35" uuid="ce1af9a3-3bfd-41d9-9d80-41fa7b4529fe"/>
+				<textElement>
+					<font fontName="Arial Black" size="14"/>
+				</textElement>
+				<text><![CDATA[Barangay 22-C Piapi Boulevard, Davao City]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="408" y="0" width="199" height="35" uuid="42cd2557-0112-4597-b6ff-c1e3e9218911"/>
+				<textElement>
+					<font fontName="Arial Black" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="52" splitType="Stretch">
+			<staticText>
+				<reportElement x="387" y="32" width="185" height="20" uuid="bd82aaf0-cc18-416c-85c4-591cb1f677fd"/>
+				<textElement>
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Contraceptive Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="211" y="32" width="176" height="20" uuid="985abdcc-d8ae-413e-b7df-bc4305f73f3d"/>
+				<textElement>
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Medicine Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="57" height="20" uuid="5863b89d-991a-4412-a587-14d6ad516452"/>
+				<textElement>
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="57" y="32" width="154" height="20" uuid="f5f02c4a-2402-40ee-b2f3-52dc96e8677a"/>
+				<textElement>
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Patient Name]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="387" y="0" width="185" height="20" uuid="2103c6b4-7200-475b-a7da-40597e6e2e77"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{con_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="211" y="0" width="176" height="20" uuid="4a71ac14-af8d-404f-bb83-418ba60e6c14"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{med_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="67" y="0" width="144" height="20" uuid="1f7b9757-1bda-42cb-9e9f-59bad607ffed"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="67" height="20" uuid="7a57e6e6-cf85-4411-a89c-578a4465a495"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ma_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="183" splitType="Stretch">
+			<pieChart>
+				<chart>
+					<reportElement x="0" y="0" width="281" height="183" uuid="df571d49-ea5b-46a3-8e1f-1c5abd0ed7c4"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{med_name}]]></keyExpression>
+					<valueExpression><![CDATA[$F{med_avail}]]></valueExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<pieChart>
+				<chart>
+					<reportElement x="303" y="0" width="269" height="183" uuid="d003aeba-81ed-4741-9480-fb6adae86c56"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{con_name}]]></keyExpression>
+					<valueExpression><![CDATA[$F{con_avail}]]></valueExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
